@@ -1,0 +1,13 @@
+<template>
+    <div>
+        <div v-if="transaction" class="card mt-3 text-white bg-success" style="max-width: 20rem;">
+            <div class="card-header">{{transaction.amount}}$</div>
+            <div class="card-body">
+                <h4 class="card-title">{{transaction.transactionType}}</h4>
+                <h5 class="card-title">{{transaction.date}}</h5>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script src="./transactionDetails.ts"></script>

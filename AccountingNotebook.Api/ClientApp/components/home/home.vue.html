@@ -1,0 +1,16 @@
+<template>
+    <div>
+        <div class="card mt-3 text-white" v-for="item in transactions" style="max-width: 20rem;"
+            v-bind:class="{ 'bg-success': item.transactionType === 'Debit', 'bg-info': item.transactionType === 'Credit' }">
+            <div class="card-header">{{item.amount}}$</div>
+            <div class="card-body">
+                <h4 class="card-title">{{item.transactionType}}</h4>
+                <router-link :to="{ path: '/' + item.id}" :exact="true">
+                    View details
+                </router-link>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script src="./home.ts"></script>
