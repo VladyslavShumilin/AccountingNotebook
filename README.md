@@ -9,4 +9,4 @@ Client-side: vue.js, TypeScript
 
 # Installation
 
-Clone this git repository and install node modules
+Clone this git repository, install node modules and then run command "dotnet run"
