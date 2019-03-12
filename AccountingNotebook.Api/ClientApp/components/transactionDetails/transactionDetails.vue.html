@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div v-if="transaction" class="card mt-3 text-white bg-success" style="max-width: 20rem;">
+        <div v-if="transaction" class="card mt-3 text-white" style="max-width: 20rem;"
+             v-bind:class="{ 'bg-success': transaction.transactionType === 'Debit', 'bg-info': transaction.transactionType === 'Credit' }">
             <div class="card-header">{{transaction.amount}}$</div>
             <div class="card-body">
                 <h4 class="card-title">{{transaction.transactionType}}</h4>

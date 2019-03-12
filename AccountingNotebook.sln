@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingNotebook.Data", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingNotebook.BLL", "AccountingNotebook.BLL\AccountingNotebook.BLL.csproj", "{CCC04008-460F-41DD-B03E-1A209BB9586F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingNotebook.Web", "AccountingNotebook.Web\AccountingNotebook.Web.csproj", "{389A9869-4FBB-428A-9148-FC19CBB51611}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingNotebook.Enums", "AccountingNotebook.Enums\AccountingNotebook.Enums.csproj", "{FC7A9C4E-728C-44D6-9E35-B1F78170DCE1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingNotebook.Api", "AccountingNotebook.Api\AccountingNotebook.Api.csproj", "{E20C3F44-82B5-4ACB-B729-B1A9376BFE86}"
@@ -27,10 +25,6 @@ Global
 		{CCC04008-460F-41DD-B03E-1A209BB9586F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCC04008-460F-41DD-B03E-1A209BB9586F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCC04008-460F-41DD-B03E-1A209BB9586F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{389A9869-4FBB-428A-9148-FC19CBB51611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{389A9869-4FBB-428A-9148-FC19CBB51611}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{389A9869-4FBB-428A-9148-FC19CBB51611}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{389A9869-4FBB-428A-9148-FC19CBB51611}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC7A9C4E-728C-44D6-9E35-B1F78170DCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC7A9C4E-728C-44D6-9E35-B1F78170DCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC7A9C4E-728C-44D6-9E35-B1F78170DCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU

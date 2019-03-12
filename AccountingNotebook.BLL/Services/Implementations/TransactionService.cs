@@ -20,7 +20,6 @@ namespace AccountingNotebook.BLL.Services.Implementations
 
         public TransactionDto CommitTransaction(double amount, TransactionType transactionType)
         {
-            Account.IsLocked = true;
             var transaction = new Transaction(amount, transactionType);
             _account.Transactions.Add(transaction);
 
@@ -35,7 +34,6 @@ namespace AccountingNotebook.BLL.Services.Implementations
                     break;
             }
 
-            Account.IsLocked = false;
             return new TransactionDto(transaction);
         }
 

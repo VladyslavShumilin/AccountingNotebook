@@ -9,59 +9,88 @@ namespace AccountingNotebook.Data.Domain
     public class Account
     {
         public double Balance { get; private set; }
-        public ICollection<Transaction> Transactions { get; }
+        private readonly ICollection<Transaction> _transactions;
 
         private static readonly Account Instance = new Account();
-        public static bool IsLocked = false;
+
+        private readonly ReaderWriterLockSlim _locker = new ReaderWriterLockSlim();
 
         private Account()
         {
             Balance = 0;
-            Transactions = new List<Transaction>();
+            _transactions = new List<Transaction>();
+        }
+
+        public ICollection<Transaction> Transactions
+        {
+            get
+            {
+                try
+                {
+                    _locker.EnterReadLock();
+                    return _transactions;
+                }
+                finally
+                {
+                    _locker.ExitReadLock();
+                }
+            }
         }
 
         public static Account GetInstance()
         {
-            if (!IsLocked) return Instance;
-
-            Thread.Sleep(200);
-            return GetInstance();
-
+            return Instance;
         }
 
         public void Debit(double amount, string transactionId)
         {
-            var transaction = Transactions
-                .FirstOrDefault(t => t.Id == transactionId);
-
-            if (transaction == null)
+            try
             {
-                throw new ArgumentException();
-            }
+                _locker.EnterWriteLock();
+                var transaction = _transactions
+                    .FirstOrDefault(t => t.Id == transactionId);
 
-            Balance += amount;
-            transaction.TransactionStatus = TransactionStatus.Success;
+                if (transaction == null)
+                {
+                    throw new ArgumentException();
+                }
+
+                Balance += amount;
+                transaction.TransactionStatus = TransactionStatus.Success;
+            }
+            finally
+            {
+                _locker.ExitWriteLock();
+            }
         }
 
         public void Credit(double amount, string transactionId)
         {
-            var transaction = Transactions
-                .FirstOrDefault(t => t.Id == transactionId);
-
-            if (transaction == null)
+            try
             {
-                throw new KeyNotFoundException();
+                _locker.EnterWriteLock();
+                var transaction = _transactions
+                    .FirstOrDefault(t => t.Id == transactionId);
+
+                if (transaction == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                if (amount > Balance)
+                {
+                    transaction.TransactionStatus = TransactionStatus.Failure;
+                    throw new ArgumentException("Invalid input");
+                }
+
+                Balance -= amount;
+                transaction.TransactionStatus = TransactionStatus.Success;
+            }
+            finally
+            {
+                _locker.ExitWriteLock();
             }
 
-            if (amount > Balance)
-            {
-                transaction.TransactionStatus = TransactionStatus.Failure;
-                throw new ArgumentException("Invalid input");
-            }
-
-            Balance -= amount;
-            transaction.TransactionStatus = TransactionStatus.Success;
         }
-
     }
 }
